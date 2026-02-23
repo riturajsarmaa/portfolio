@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rituraj Sarma — Senior Product Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream:#f5f0e8;--cream2:#ede7d9;--paper:#faf8f4;--ink:#1a1714;--ink2:#2e2a25;
+      --mid:#6b6560;--light:#b0a89e;--red:#c0392b;--red-dim:rgba(192,57,43,0.08);--border:rgba(26,23,20,0.1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Lato',sans-serif;background:var(--paper);color:var(--ink2);overflow-x:hidden;cursor:none;}
+    ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--cream);}::-webkit-scrollbar-thumb{background:var(--red);}
+    .cursor{width:10px;height:10px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s,width .2s,height .2s;}
+    .cursor-ring{width:34px;height:34px;border:1px solid var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 4rem;background:rgba(245,240,232,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-logo{font-family:'Bodoni Moda',serif;font-size:1.1rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink);}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .2s;}
+    .nav-links a:hover{color:var(--red);}
+    #hero{min-height:100vh;display:grid;grid-template-rows:1fr auto;padding:10rem 4rem 4rem;background:var(--cream);position:relative;overflow:hidden;}
+    .hero-rule{position:absolute;top:7rem;left:4rem;right:4rem;height:1px;background:var(--border);}
+    .hero-main{display:grid;grid-template-columns:1fr auto;align-items:end;gap:3rem;}
+    .hero-issue{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:var(--red);text-transform:uppercase;margin-bottom:1.8rem;animation:fadeIn .6s ease both;}
+    .hero-name{font-family:'Bodoni Moda',serif;font-size:clamp(4rem,9vw,9rem);font-weight:900;line-height:.92;color:var(--ink);letter-spacing:-.02em;animation:slideUp .8s .05s cubic-bezier(.16,1,.3,1) both;}
+    .hero-name .surname{font-style:italic;color:var(--red);}
+    .hero-right-col{text-align:right;padding-bottom:.5rem;animation:fadeIn .7s .2s ease both;}
+    .hero-title-block{font-family:'DM Mono',monospace;font-size:.78rem;line-height:2;letter-spacing:.08em;color:var(--mid);text-transform:uppercase;}
+    .hero-title-block strong{color:var(--ink);display:block;}
+    .hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;padding-top:3rem;border-top:1px solid var(--border);animation:fadeIn .7s .3s ease both;}
+    .hero-summary{max-width:580px;font-size:1.05rem;line-height:1.8;color:var(--mid);font-weight:300;}
+    .hero-summary strong{color:var(--ink2);font-weight:700;}
+    .hero-metrics{display:flex;gap:3rem;flex-shrink:0;}
+    .hm{text-align:center;}
+    .hm-num{font-family:'Bodoni Moda',serif;font-size:2.8rem;font-weight:700;color:var(--ink);line-height:1;}
+    .hm-num sup{font-size:1.1rem;color:var(--red);}
+    .hm-label{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--light);letter-spacing:.12em;text-transform:uppercase;margin-top:.3rem;}
+    section{padding:6rem 4rem;}
+    .section-header{display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:1.5rem;margin-bottom:4rem;border-bottom:2px solid var(--ink);padding-bottom:1rem;}
+    .section-num{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--red);letter-spacing:.2em;}
+    .section-title{font-family:'Bodoni Moda',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;color:var(--ink);}
+    .section-title em{font-style:italic;color:var(--red);}
+    #experience{background:var(--paper);}
+    .exp-item{display:grid;grid-template-columns:220px 1fr;gap:3rem;padding:3rem 0;border-bottom:1px solid var(--border);opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s;}
+    .exp-item.visible{opacity:1;transform:translateY(0);}
+    .exp-period{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--red);letter-spacing:.1em;margin-bottom:.6rem;}
+    .exp-co{font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.2rem;}
+    .exp-loc{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--light);letter-spacing:.08em;text-transform:uppercase;}
+    .exp-position{font-family:'Bodoni Moda',serif;font-size:1.7rem;font-weight:700;color:var(--ink);margin-bottom:.6rem;line-height:1.2;}
+    .exp-project-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:var(--red);background:var(--red-dim);padding:.3rem .8rem;margin-bottom:1.4rem;text-transform:uppercase;}
+    .exp-list{list-style:none;}
+    .exp-list li{display:flex;gap:1rem;font-size:.9rem;line-height:1.75;color:var(--mid);padding:.5rem 0;border-bottom:1px dotted var(--border);}
+    .exp-list li:last-child{border-bottom:none;}
+    .exp-list li::before{content:'—';color:var(--red);flex-shrink:0;font-weight:700;}
+    .exp-list li strong{color:var(--ink2);font-weight:700;}
+    .exp-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.4rem;}
+    .chip{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .7rem;border:1px solid var(--border);color:var(--mid);transition:border-color .2s,color .2s;}
+    .chip:hover{border-color:var(--red);color:var(--red);}
+    .chip.accent{border-color:var(--ink);color:var(--ink2);background:var(--cream);}
+    #skills{background:var(--cream);}
+    .skills-masonry{columns:3;column-gap:2rem;max-width:1100px;}
+    .skill-block{break-inside:avoid;margin-bottom:2rem;background:var(--paper);padding:1.8rem;border-top:3px solid var(--ink);opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s;}
+    .skill-block.visible{opacity:1;transform:translateY(0);}
+    .skill-block:hover{border-top-color:var(--red);}
+    .sb-title{font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:1rem;}
+    .sb-pills{font-size:.78rem;color:var(--mid);line-height:2.2;}
+    #certifications{background:var(--paper);}
+    .certs-list{max-width:900px;}
+    .cert-row{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:1.5rem;padding:1.4rem 0;border-bottom:1px solid var(--border);opacity:0;transform:translateX(-16px);transition:opacity .5s,transform .5s;}
+    .cert-row.visible{opacity:1;transform:translateX(0);}
+    .cert-index{font-family:'Bodoni Moda',serif;font-size:1.4rem;font-weight:700;color:var(--cream2);}
+    .cert-name{font-size:.95rem;font-weight:700;color:var(--ink2);margin-bottom:.15rem;}
+    .cert-issuer{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--red);letter-spacing:.08em;text-transform:uppercase;}
+    .cert-badge{font-size:1.3rem;}
+    #education{background:var(--cream);}
+    .edu-row{display:grid;grid-template-columns:220px 1fr;gap:3rem;padding:2.5rem 0;border-bottom:1px solid var(--border);opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s;max-width:860px;}
+    .edu-row.visible{opacity:1;transform:translateY(0);}
+    .edu-year{font-family:'Bodoni Moda',serif;font-size:2rem;font-weight:700;color:var(--cream2);line-height:1;}
+    .edu-degree{font-family:'Bodoni Moda',serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin-bottom:.4rem;}
+    .edu-school{font-size:.88rem;color:var(--mid);}
+    #contact{background:var(--ink);color:var(--cream);padding:7rem 4rem;}
+    #contact .section-header{border-bottom-color:rgba(245,240,232,.15);}
+    #contact .section-num{color:#c0392b;}
+    #contact .section-title{color:var(--cream);}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:900px;}
+    .contact-lead{font-family:'Bodoni Moda',serif;font-size:1.6rem;font-style:italic;color:var(--cream2);line-height:1.5;margin-bottom:2rem;}
+    .contact-detail{display:flex;flex-direction:column;gap:1.2rem;}
+    .contact-item a,.contact-item span{display:flex;align-items:center;gap:.8rem;font-family:'DM Mono',monospace;font-size:.8rem;color:var(--light);letter-spacing:.06em;text-decoration:none;transition:color .2s;}
+    .contact-item a:hover{color:var(--cream);}
+    .contact-item a svg,.contact-item span svg{color:var(--red);flex-shrink:0;}
+    footer{background:var(--ink2);padding:1.5rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);}
+    footer p{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:rgba(255,255,255,.25);text-transform:uppercase;}
+    footer span{color:rgba(192,57,43,.7);}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    @keyframes slideUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+    @media(max-width:768px){
+      nav{padding:1rem 1.5rem;}.nav-links{display:none;}
+      #hero{padding:8rem 1.5rem 3rem;}.hero-main{grid-template-columns:1fr;}.hero-right-col{text-align:left;}
+      .hero-bottom{flex-direction:column;gap:2rem;}.hero-metrics{gap:2rem;}
+      section{padding:4rem 1.5rem;}
+      .exp-item,.edu-row{grid-template-columns:1fr;gap:1rem;}
+      .cert-row{grid-template-columns:1fr auto;}.cert-index{display:none;}
+      .skills-masonry{columns:1;}
+      .contact-grid{grid-template-columns:1fr;gap:2rem;}
+      footer{flex-direction:column;gap:.5rem;text-align:center;}
+    }
+    @media(min-width:769px) and (max-width:1100px){.skills-masonry{columns:2;}}
+  </style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="nav-logo">Rituraj Sarma</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-rule"></div>
+  <div>
+    <div class="hero-main">
+      <div>
+        <div class="hero-issue">Senior Product Manager &nbsp;·&nbsp; Plano, TX &nbsp;·&nbsp; Open to Relocate</div>
+        <h1 class="hero-name">Rituraj<br/><span class="surname">Sarma.</span></h1>
+      </div>
+      <div class="hero-right-col">
+        <div class="hero-title-block">
+          <strong>Current Role</strong>
+          Senior Product Manager<br/>Tech Mahindra × AT&amp;T
+          <br/><br/>
+          <strong>Location</strong>
+          Plano, TX 75023<br/>
+          <strong>Status</strong>
+          Open to Opportunities
+        </div>
+      </div>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-summary">
+        CSPO-certified product leader with <strong>11+ years</strong> shaping enterprise e-commerce and digital engineering at AT&amp;T scale. Expert at translating complex business needs into precise technical requirements — driving <strong>50% faster releases</strong>, <strong>20% sprint velocity gains</strong>, and a <strong>15% lift in customer satisfaction</strong>.
+      </p>
+      <div class="hero-metrics">
+        <div class="hm"><div class="hm-num">11<sup>+</sup></div><div class="hm-label">Years Exp.</div></div>
+        <div class="hm"><div class="hm-num">50<sup>%</sup></div><div class="hm-label">Faster Releases</div></div>
+        <div class="hm"><div class="hm-num">20<sup>%</sup></div><div class="hm-label">Velocity Gain</div></div>
+        <div class="hm"><div class="hm-num">15<sup>%</sup></div><div class="hm-label">CSAT Lift</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">01 —</span>
+    <h2 class="section-title">Work <em>Experience</em></h2>
+  </div>
+
+  <div class="exp-item">
+    <div>
+      <div class="exp-period">Jan 2016 — Present</div>
+      <div class="exp-co">Tech Mahindra (Americas) × AT&amp;T</div>
+      <div class="exp-loc">United States</div>
+    </div>
+    <div>
+      <div class="exp-position">Senior Product Manager</div>
+      <span class="exp-project-tag">Digital Engineering &amp; Customer Experience · AT&amp;T e-Commerce Catalog</span>
+      <ul class="exp-list">
+        <li><span><strong>User Stories &amp; Prototypes:</strong> Authored detailed user stories for complex business needs; built Figma and paper prototypes to visually map solutions aligned with product strategy.</span></li>
+        <li><span><strong>API &amp; System Requirements:</strong> Translated business requirements into REST API technical specs, documenting JSON/XML payload structures for partner system integrations.</span></li>
+        <li><span><strong>API Validation &amp; UAT:</strong> Validated API responses (JSON/XML) during UAT to ensure data consistency; directed end-to-end defect-free product launches.</span></li>
+        <li><span><strong>Agile Leadership:</strong> Facilitated sprint planning, stand-ups, retrospectives, and backlog refinement — delivering a <strong>20% increase in sprint velocity</strong>.</span></li>
+        <li><span><strong>Stakeholder Management:</strong> Led demos and feedback sessions to validate user stories, achieving a <strong>15% increase in customer satisfaction</strong>.</span></li>
+        <li><span><strong>RTM &amp; Compliance:</strong> Managed Requirement Traceability Matrix for full lifecycle visibility, reducing missed requirements by <strong>15%</strong>.</span></li>
+        <li><span><strong>GAP Analysis &amp; ERP:</strong> Led comprehensive GAP analyses identifying inefficiencies; proposed reengineering strategies improving ERP infrastructure compatibility.</span></li>
+        <li><span><strong>SQL &amp; Reporting:</strong> Developed and executed SQL queries supporting ad-hoc reporting, dashboards, and data quality validation for leadership decisions.</span></li>
+        <li><span><strong>Tooling:</strong> Leveraged Jira and Azure DevOps to manage workflows, prioritize product backlog, and monitor sprint progress for timely feature delivery.</span></li>
+      </ul>
+      <div class="exp-chips">
+        <span class="chip accent">Product Management</span><span class="chip accent">Agile / Scrum</span>
+        <span class="chip">Figma</span><span class="chip">REST APIs</span><span class="chip">JSON / XML</span>
+        <span class="chip">SQL</span><span class="chip">Azure DevOps</span><span class="chip">Jira</span>
+        <span class="chip">UAT</span><span class="chip">RTM</span><span class="chip">ERP</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div>
+      <div class="exp-period">May 2013 — Jan 2016</div>
+      <div class="exp-co">Tech Mahindra Ltd × AT&amp;T</div>
+      <div class="exp-loc">India</div>
+    </div>
+    <div>
+      <div class="exp-position">Data Analyst</div>
+      <span class="exp-project-tag">Digital Engineering &amp; CX · e-Commerce Catalog Management</span>
+      <ul class="exp-list">
+        <li><span><strong>Catalog Management:</strong> Executed end-to-end e-commerce merchandising updates — pricing, promotions, product launches — achieving <strong>100% adherence to release schedules</strong>.</span></li>
+        <li><span><strong>Release Automation:</strong> Automated database build and release workflows, achieving a <strong>50% reduction in release cycle time</strong> and saving 20+ hours per release.</span></li>
+        <li><span><strong>Content Authoring:</strong> Authored and maintained production content using Adobe Workfront, Sanity.io, AEM 6.1/6.4, and Sales CQ.</span></li>
+        <li><span><strong>SDLC Leadership:</strong> Led requirements gathering, analysis and design; produced functional specs and test plans that reduced defects by <strong>15%</strong>.</span></li>
+        <li><span><strong>Agile Velocity:</strong> Managed backlogs and sprints via Jira and HP Quality Center, improving team velocity by <strong>20%</strong>.</span></li>
+        <li><span><strong>Root Cause Analysis:</strong> Diagnosed and resolved production catalog bugs through in-depth RCA, reducing defect recurrence across platforms.</span></li>
+      </ul>
+      <div class="exp-chips">
+        <span class="chip accent">Data Analysis</span><span class="chip accent">Catalog Management</span>
+        <span class="chip">AEM 6.1/6.4</span><span class="chip">Sanity.io</span><span class="chip">Adobe Workfront</span>
+        <span class="chip">ATG/BCC/ACC</span><span class="chip">Jira</span><span class="chip">HP QC</span>
+        <span class="chip">SQL</span><span class="chip">SDLC</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">02 —</span>
+    <h2 class="section-title">Core <em>Skills</em></h2>
+  </div>
+  <div class="skills-masonry">
+    <div class="skill-block">
+      <div class="sb-title">Product &amp; Strategy</div>
+      <div class="sb-pills">Product Management &nbsp;·&nbsp; Product Strategy &nbsp;·&nbsp; PLM &nbsp;·&nbsp; Roadmapping &nbsp;·&nbsp; User Stories &nbsp;·&nbsp; Backlog Management &nbsp;·&nbsp; Solution Evaluation &nbsp;·&nbsp; Business Acumen</div>
+    </div>
+    <div class="skill-block">
+      <div class="sb-title">Agile &amp; Delivery</div>
+      <div class="sb-pills">Scrum / Agile &nbsp;·&nbsp; Sprint Planning &nbsp;·&nbsp; PI Planning &nbsp;·&nbsp; Backlog Grooming &nbsp;·&nbsp; Scrum Ceremonies &nbsp;·&nbsp; Waterfall &nbsp;·&nbsp; SDLC</div>
+    </div>
+    <div class="skill-block">
+      <div class="sb-title">Analysis &amp; Requirements</div>
+      <div class="sb-pills">Requirements Gathering &nbsp;·&nbsp; BRD / FRD / SRD &nbsp;·&nbsp; GAP Analysis &nbsp;·&nbsp; Root Cause Analysis &nbsp;·&nbsp; RTM &nbsp;·&nbsp; UAT &nbsp;·&nbsp; Business Process Reengineering &nbsp;·&nbsp; Stakeholder Elicitation</div>
+    </div>
+    <div class="skill-block">
+      <div class="sb-title">Tools &amp; Platforms</div>
+      <div class="sb-pills">Jira &nbsp;·&nbsp; Azure DevOps &nbsp;·&nbsp; Figma &nbsp;·&nbsp; SQL &nbsp;·&nbsp; Power BI &nbsp;·&nbsp; Tableau &nbsp;·&nbsp; Adobe Workfront &nbsp;·&nbsp; AEM &nbsp;·&nbsp; Sanity.io &nbsp;·&nbsp; SharePoint &nbsp;·&nbsp; HP QC</div>
+    </div>
+    <div class="skill-block">
+      <div class="sb-title">Tech &amp; Integration</div>
+      <div class="sb-pills">REST APIs &nbsp;·&nbsp; JSON / XML &nbsp;·&nbsp; ERP &nbsp;·&nbsp; Oracle / MySQL &nbsp;·&nbsp; ATG e-Commerce &nbsp;·&nbsp; OMS / OCE &nbsp;·&nbsp; UML &nbsp;·&nbsp; Wireframing &nbsp;·&nbsp; Telegence</div>
+    </div>
+    <div class="skill-block">
+      <div class="sb-title">DevOps &amp; Cloud</div>
+      <div class="sb-pills">DevOps &nbsp;·&nbsp; Docker &nbsp;·&nbsp; Ansible &nbsp;·&nbsp; Terraform &nbsp;·&nbsp; CI/CD &nbsp;·&nbsp; Configuration Management &nbsp;·&nbsp; Ubuntu</div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="section-header">
+    <span class="section-num">03 —</span>
+    <h2 class="section-title"><em>Certifications</em></h2>
+  </div>
+  <div class="certs-list">
+    <div class="cert-row"><div class="cert-index">01</div><div><div class="cert-name">Certified Scrum Product Owner® (CSPO®)</div><div class="cert-issuer">Scrum Alliance</div></div><div class="cert-badge">🏅</div></div>
+    <div class="cert-row"><div class="cert-index">02</div><div><div class="cert-name">PG Program — Agile Scrum Master (ASM®)</div><div class="cert-issuer">Simplilearn</div></div><div class="cert-badge">🚀</div></div>
+    <div class="cert-row"><div class="cert-index">03</div><div><div class="cert-name">Agile Scrum Foundation</div><div class="cert-issuer">Simplilearn</div></div><div class="cert-badge">⚡</div></div>
+    <div class="cert-row"><div class="cert-index">04</div><div><div class="cert-name">PG Program — DevOps Certification Training</div><div class="cert-issuer">Simplilearn · Caltech (2023–2024)</div></div><div class="cert-badge">🔁</div></div>
+    <div class="cert-row"><div class="cert-index">05</div><div><div class="cert-name">Configuration Management with Ansible &amp; Terraform</div><div class="cert-issuer">Simplilearn</div></div><div class="cert-badge">🛠️</div></div>
+    <div class="cert-row"><div class="cert-index">06</div><div><div class="cert-name">Docker Certified Associate (DCA) Training</div><div class="cert-issuer">Simplilearn</div></div><div class="cert-badge">🐳</div></div>
+    <div class="cert-row"><div class="cert-index">07</div><div><div class="cert-name">Quality Assurance — Manual &amp; Automation</div><div class="cert-issuer">Qspiders</div></div><div class="cert-badge">🧪</div></div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">04 —</span>
+    <h2 class="section-title"><em>Education</em></h2>
+  </div>
+  <div class="edu-row">
+    <div class="edu-year">2012</div>
+    <div><div class="edu-degree">B.Tech in Computer Science</div><div class="edu-school">Assam Don Bosco University — Assam, India</div></div>
+  </div>
+  <div class="edu-row">
+    <div class="edu-year">2023–24</div>
+    <div><div class="edu-degree">Post Diploma Program in DevOps</div><div class="edu-school">California Institute of Technology (Caltech) — Online</div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">05 —</span>
+    <h2 class="section-title" style="color:var(--cream)">Get in <em>Touch</em></h2>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-lead">"Open to new opportunities, collaborations, and the next big challenge."</p>
+      <p style="font-size:.88rem;color:var(--light);line-height:1.8;">11+ years building enterprise-scale products at AT&amp;T. Based in Plano, TX — open to relocate. Let's build something great together.</p>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-item">
+        <a href="mailto:riturajsarmaa@gmail.com">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+          riturajsarmaa@gmail.com
+        </a>
+      </div>
+      <div class="contact-item">
+        <a href="tel:+14253651929">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.08 3.38 2 2 0 0 1 3.05 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+          +1 (425) 365-1929
+        </a>
+      </div>
+      <div class="contact-item">
+        <a href="https://www.linkedin.com/in/riturajsarma/" target="_blank">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0H5C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73a1.77 1.77 0 1 1 0-3.54 1.77 1.77 0 0 1 0 3.54zM20 19h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97V19h-3V8h2.88v1.5h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.59V19z"/></svg>
+          linkedin.com/in/riturajsarma
+        </a>
+      </div>
+      <div class="contact-item">
+        <span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Plano, TX 75023 · Open to Relocate
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span>Rituraj Sarma</span>. All rights reserved.</p>
+  <p>Senior Product Manager · Plano, TX · <span>riturajsarmaa@gmail.com</span></p>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+  function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+  animRing();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cursor.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.opacity='0';});
+    el.addEventListener('mouseleave',()=>{cursor.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='.4';});
+  });
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),(i%5)*80);}});
+  },{threshold:.07});
+  document.querySelectorAll('.exp-item,.skill-block,.cert-row,.edu-row').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
